@@ -1,0 +1,44 @@
+{
+  "name": "runebook",
+  "version": "0.1.0",
+  "description": "An app to help manage runes in League of Legends. Save your own rune pages for each champion and get a reminder when you haven't set your runes.",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "league-connect": "6.0.0-rc13"
+  },
+  "devDependencies": {
+    "electron": "44.7.2",
+    "electron-builder": "26.0.12"
+  },
+  "build": {
+    "appId": "com.runebook.app",
+    "productName": "RuneBook",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "zip",
+      "icon": "build/icon.ico",
+      "signAndEditExecutable": false
+    },
+    "directories": {
+      "output": "dist"
+    },
+    "afterPack": "build/afterPack.js"
+  },
+  "license": "MIT",
+  "author": "OmerKori",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OmerKori/RuneBook.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OmerKori/RuneBook/issues"
+  },
+  "homepage": "https://github.com/OmerKori/RuneBook",
+  "private": true
+}
