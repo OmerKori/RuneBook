@@ -8,13 +8,11 @@ bottom bar; click it to pick one of your pages for the champion you're on, and i
 
 ![RuneBook's button in champ select](docs/champ-select.png)
 
-RuneBook adds the round button circled in blue to the client's bottom bar, next to the client's own rune buttons.
-It appears in every champ select while RuneBook runs in the tray:
+The button circled in blue is RuneBook's. Up close, next to the client's own rune buttons:
 
 ![The RuneBook button next to the client's rune buttons](docs/button.png)
 
-Click it to open your pages for the champion you're on and pick one. The page goes straight into the client
-(here it's named "RuneBook: Grasp of the Undying · Inspiration"), so there's nothing to copy by hand.
+The page you pick shows up in the client's rune page list; here it's "RuneBook: Grasp of the Undying · Inspiration".
 
 ## Features
 
