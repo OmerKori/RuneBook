@@ -10,21 +10,13 @@ bottom bar; click it to pick one of your pages for the champion you're on, and i
 
 - **Your pages, per champion.** Every champion starts with Riot's recommended pages; edit, rename, delete or add
   your own. Everything is saved on your PC and works with League closed.
-- **One click in champ select.** The button in the client opens a picker over the client with your pages for the
-  champion you're hovering. The page that's in the client is framed. Edit, add or delete pages right there.
-- **Default page.** Your ★ page goes into the client by itself when you hover a champion (or when you lock in,
-  or never; see Settings).
+- **Reminder.** If the game is about to start and you haven't set your runes, a reminder would trigger
 - **Conflicts.** For a page you play with small variations, press ⇄ next to a row in the editor. When you pick that
-  page in champ select, RuneBook asks which rune you want for that row before setting the page.
-  Works on the three small primary runes, the secondary runes and each stat shard row.
-  To offer only some runes of a row, right-click them instead.
-- **Reminder.** If you lock in and haven't opened RuneBook, the button turns red and pulses, and a sound plays
-  before the game starts (volume, timing and repeat in Settings).
+  page, RuneBook asks which rune you want for that row before setting the page.
+
 - **Saves pages you make in the client.** Build or edit a page in the client and RuneBook offers to keep it.
 - **Step-by-step editor** like the client's, with each rune's description (hold Shift for the full text).
   The earlier editor that shows all runes at once is still in Settings.
-- **After a patch**, pages that use a rune that no longer exists are marked with a red ! and aren't sent to
-  the client until you fix them.
 
 ## Download and install
 
