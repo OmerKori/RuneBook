@@ -2,9 +2,20 @@
 // league-connect finds the client process, reads its port + password and
 // trusts Riot's self-signed certificate for us.
 const { EventEmitter } = require('events');
+const { execFile } = require('child_process');
 const { authenticate, createHttp1Request, createWebSocketConnection } = require('league-connect');
 
 const PAGE_PREFIX = 'RuneBook';
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function leagueRunning() {
+  if (process.platform !== 'win32') return Promise.resolve(true);
+  return new Promise((resolve) => {
+    execFile('tasklist', ['/FI', 'IMAGENAME eq LeagueClientUx.exe', '/NH', '/FO', 'CSV'], { windowsHide: true },
+      (err, out) => resolve(!err && /LeagueClientUx\.exe/i.test(out)));
+  });
+}
 
 class Lcu extends EventEmitter {
   constructor() {
@@ -19,6 +30,9 @@ class Lcu extends EventEmitter {
   }
 
   async connectLoop() {
+    // league-connect looks for the client by starting PowerShell every few seconds. That's heavy for something
+    // that waits in the tray all day, so first wait for the client with a cheap process check.
+    while (!(await leagueRunning())) await sleep(5000);
     try {
       this.credentials = await authenticate({ awaitConnection: true, pollInterval: 3000 });
       this.ws = await createWebSocketConnection({

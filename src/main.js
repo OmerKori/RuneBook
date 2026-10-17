@@ -720,7 +720,7 @@ function createTray() {
       saveStore();
       applyStartWithWindows();
     } },
-    { label: 'Quit RuneBook', click: () => app.exit(0) },
+    { label: 'Quit RuneBook (until you open it or restart Windows)', click: () => app.exit(0) },
   ]));
   rebuild();
   tray.on('click', createWindow);
