@@ -20,9 +20,7 @@ The button circled in blue is RuneBook's. Up close, next to the client's own run
 - **Reminder.** If the game is about to start and you haven't set your runes, a reminder would trigger.
 - **Conflicts.** For a page you play with small variations, press ⇄ next to a row in the editor. When you pick that
   page, RuneBook asks which rune you want for that row before setting the page.
-- **Saves pages you make in the client.** Build or edit a page in the client and RuneBook offers to keep it.
-- **Step-by-step editor** like the client's, with each rune's description (hold Shift for the full text).
-  The earlier editor that shows all runes at once is still in Settings.
+
 
 ## Download and install
 
