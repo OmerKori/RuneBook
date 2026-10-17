@@ -8,7 +8,6 @@ bottom bar. click it to pick one of your pages for the champion you're on, and i
 
 ![RuneBook's button in champ select](docs/champ-select.png)
 
-The button circled in blue is RuneBook's. Up close, next to the client's own rune buttons:
 
 ![The RuneBook button next to the client's rune buttons](docs/button.png)
 
