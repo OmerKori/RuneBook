@@ -4,7 +4,7 @@ An app to help manage runes in League of Legends. Save your own rune pages for e
 when you haven't set your runes.
 
 RuneBook runs on Windows next to the League client. In champ select, a round button appears in the client's
-bottom bar; click it to pick one of your pages for the champion you're on, and it goes straight into the client.
+bottom bar. click it to pick one of your pages for the champion you're on, and it goes straight into the client.
 
 ![RuneBook's button in champ select](docs/champ-select.png)
 
@@ -12,9 +12,8 @@ The button circled in blue is RuneBook's. Up close, next to the client's own run
 
 ![The RuneBook button next to the client's rune buttons](docs/button.png)
 
-The page you pick shows up in the client's rune page list; here it's "RuneBook: Grasp of the Undying · Inspiration".
 
-## Features
+## Main Features
 
 - **Your pages, per champion.** Every champion starts with Riot's recommended pages; edit, rename, delete or add
   your own. Everything is saved on your PC and works with League closed.
