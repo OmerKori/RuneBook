@@ -6,6 +6,16 @@ when you haven't set your runes.
 RuneBook runs on Windows next to the League client. In champ select, a round button appears in the client's
 bottom bar; click it to pick one of your pages for the champion you're on, and it goes straight into the client.
 
+![RuneBook's button in champ select](docs/champ-select.png)
+
+RuneBook adds the round button circled in blue to the client's bottom bar, next to the client's own rune buttons.
+It appears in every champ select while RuneBook runs in the tray:
+
+![The RuneBook button next to the client's rune buttons](docs/button.png)
+
+Click it to open your pages for the champion you're on and pick one. The page goes straight into the client
+(here it's named "RuneBook: Grasp of the Undying · Inspiration"), so there's nothing to copy by hand.
+
 ## Features
 
 - **Your pages, per champion.** Every champion starts with Riot's recommended pages; edit, rename, delete or add
