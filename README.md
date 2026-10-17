@@ -18,10 +18,9 @@ The page you pick shows up in the client's rune page list; here it's "RuneBook: 
 
 - **Your pages, per champion.** Every champion starts with Riot's recommended pages; edit, rename, delete or add
   your own. Everything is saved on your PC and works with League closed.
-- **Reminder.** If the game is about to start and you haven't set your runes, a reminder would trigger
+- **Reminder.** If the game is about to start and you haven't set your runes, a reminder would trigger.
 - **Conflicts.** For a page you play with small variations, press ⇄ next to a row in the editor. When you pick that
   page, RuneBook asks which rune you want for that row before setting the page.
-
 - **Saves pages you make in the client.** Build or edit a page in the client and RuneBook offers to keep it.
 - **Step-by-step editor** like the client's, with each rune's description (hold Shift for the full text).
   The earlier editor that shows all runes at once is still in Settings.
@@ -29,7 +28,8 @@ The page you pick shows up in the client's rune page list; here it's "RuneBook: 
 ## Download and install
 
 1. Download `RuneBook-win.zip` from the [latest release](https://github.com/OmerKori/RuneBook/releases/latest).
-2. Unzip it anywhere (for example `C:\RuneBook`) and double-click `RuneBook.exe`.
+2. Unzip it anywhere (for example `C:\RuneBook`) and double-click `RuneBook.exe`. Do this once before your
+   first game: the button only shows up in the client after RuneBook has been opened.
 3. Windows may show **"Windows protected your PC"**, because RuneBook isn't code-signed yet.
    Click **More info** → **Run anyway**. You only need to do this once.
 
