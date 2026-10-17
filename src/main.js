@@ -424,7 +424,7 @@ lcu.on('currentPage', (page) => {
 lcu.on('connection', (connected) => {
   log.info(connected ? 'League client connected' : 'League client disconnected');
   setChampState({ connected });
-  if (connected) preloadRecommended();
+  if (connected) { refreshStaticIfStale(); preloadRecommended(); }
 });
 // 15 seconds before the game starts, if you still haven't opened the button, play a warning sound.
 let warnTimer = null;
@@ -474,7 +474,7 @@ lcu.on('champSelect', async (session) => {
   lastSession = session;
   if (session && !(await runesInThisGame(session))) session = null;
   else if (session && lastSession !== session) return; // a newer update arrived while we waited
-  if (session) refreshStaticIfStale();
+  if (session && !champState.inChampSelect) refreshStaticIfStale();
   const mine = myChampion(session);
   if (!session || !mine) {
     clearTimeout(warnTimer);
@@ -728,10 +728,11 @@ function createTray() {
 
 // Champion and rune data, loaded once in the main process and shared with every window.
 let staticPromise = null;
-// RuneBook usually runs for days from the tray, so look for a new patch again when champ select starts.
+// RuneBook usually runs for days from the tray, so look for a new patch whenever the client connects or
+// champ select starts. It's one small request; the minute guard only skips repeats within the same champ select.
 let staticCheckedAt = Date.now();
 function refreshStaticIfStale() {
-  if (!staticData || Date.now() - staticCheckedAt < 3 * 3600 * 1000) return;
+  if (!staticData || Date.now() - staticCheckedAt < 60 * 1000) return;
   staticCheckedAt = Date.now();
   loadStaticData(path.join(app.getPath('userData'), 'cache'))
     .then((data) => {
