@@ -469,7 +469,9 @@ function renderEditor() {
     const st = conflictState(key);
     return h('button', {
       class: `conflict-btn ${st}`,
-      title: st === 'off' ? 'Conflict: choose this one in champ select' : 'Remove the conflict',
+      title: st === 'off'
+        ? 'Make this row a conflict: when you pick this page in champ select, you choose which rune to use here. To offer only some runes, right-click them instead.'
+        : 'Remove the conflict (this row always uses the rune you set)',
       onclick: (e) => {
         e.stopPropagation();
         if (st === 'off') d.alts[key] = rowChoices(key); else delete d.alts[key];
@@ -566,9 +568,7 @@ function renderEditor() {
             rerender();
           }, 'shard', altCtl('s' + row, s.id))), conflictBtn('s' + row))
       )
-    ),
-    h('div', { class: 'muted small tip-help' }, 'Hover a rune to see what it does. Hold Shift for the full description.'),
-    h('div', { class: 'muted small alt-help' }, h('span', { class: 'alt-swatch' }), '⇄ makes a row a conflict: you choose it when you pick the page in champ select. Right-click single runes to offer only those.')
+    )
   );
 
   const nameInput = h('input', { type: 'text', id: 'pageName', placeholder: autoName(d), value: d.name, maxlength: 30 });
@@ -596,7 +596,6 @@ function renderEditor() {
         h('button', { class: 'back', onclick: () => go('champion', { champ: c }) }, `← ${c.name}`),
         nameInput
       ),
-      h('div', { class: 'muted small' }, 'Leave the name empty and the page is named after its runes.'),
       state.editorStyle === 'classic'
         ? h('div', { class: 'trees' }, primaryCol, subCol, shardCol)
         : guidedTrees(d, { setPrimaryTree, setSubTree, pickSecondary, altCtl, altRemove, conflictBtn, rerender }),
@@ -685,8 +684,7 @@ function guidedTrees(d, fn) {
       styleTabs(sub.id, primary.id, fn.setSubTree),
       head(sub, sc, 'Secondary'),
       h('div', { class: 'gslots' }, secSlots),
-      h('div', { class: 'gslots gshards', style: '--tc:#c8aa6e' }, shardSlots),
-      h('div', { class: 'muted small ghelp' }, '⇄ next to a rune makes it a conflict: you choose that one when you pick the page in champ select. To offer only some runes, right-click them instead.'))
+      h('div', { class: 'gslots gshards', style: '--tc:#c8aa6e' }, shardSlots))
   );
 }
 
@@ -1217,6 +1215,12 @@ async function init() {
   });
   window.rb.onRecProgress(({ done, total }) => {
     $('#patch').textContent = done < total ? `Downloading recommended pages ${done}/${total}` : `Patch ${state.data.version}`;
+  });
+  window.rb.onStaticUpdated(async () => {
+    try { state.data = await window.rb.loadStatic(); } catch { return; }
+    indexData();
+    $('#patch').textContent = `Patch ${state.data.version}`;
+    await refreshPages();
   });
   window.rb.onRecUpdated((all) => {
     state.recSeen = all || {};

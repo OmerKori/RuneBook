@@ -449,7 +449,32 @@ function scheduleWarning(session) {
   else warnTimer = setTimeout(fire, left - before);
 }
 
-lcu.on('champSelect', (session) => {
+// Modes without rune pages (Arena, Swarm, TFT): RuneBook stays out of champ select there.
+const NO_RUNE_MODES = new Set(['CHERRY', 'STRAWBERRY', 'TFT']);
+let modeCheck = { gameId: null, promise: null };
+function runesInThisGame(session) {
+  const gameId = session.gameId || 0;
+  if (modeCheck.gameId !== gameId || !modeCheck.promise) {
+    modeCheck = {
+      gameId,
+      promise: lcu.request('GET', '/lol-gameflow/v1/session')
+        .then((gf) => {
+          const mode = gf && gf.gameData && gf.gameData.queue && gf.gameData.queue.gameMode;
+          log.info(`Champ select, game mode ${mode || 'unknown'}`);
+          return !NO_RUNE_MODES.has(mode);
+        })
+        .catch(() => true),
+    };
+  }
+  return modeCheck.promise;
+}
+
+let lastSession = null;
+lcu.on('champSelect', async (session) => {
+  lastSession = session;
+  if (session && !(await runesInThisGame(session))) session = null;
+  else if (session && lastSession !== session) return; // a newer update arrived while we waited
+  if (session) refreshStaticIfStale();
   const mine = myChampion(session);
   if (!session || !mine) {
     clearTimeout(warnTimer);
@@ -703,6 +728,22 @@ function createTray() {
 
 // Champion and rune data, loaded once in the main process and shared with every window.
 let staticPromise = null;
+// RuneBook usually runs for days from the tray, so look for a new patch again when champ select starts.
+let staticCheckedAt = Date.now();
+function refreshStaticIfStale() {
+  if (!staticData || Date.now() - staticCheckedAt < 3 * 3600 * 1000) return;
+  staticCheckedAt = Date.now();
+  loadStaticData(path.join(app.getPath('userData'), 'cache'))
+    .then((data) => {
+      if (data.version === staticData.version) return;
+      log.info(`New patch data: ${data.version}`);
+      staticData = data;
+      preloadRecommended();
+      send('static:updated');
+    })
+    .catch((err) => console.error('Refreshing static data failed:', err.message));
+}
+
 function loadStaticInMain() {
   if (!staticPromise) {
     staticPromise = loadStaticData(path.join(app.getPath('userData'), 'cache'))

@@ -17,6 +17,7 @@ contextBridge.exposeInMainWorld('rb', {
   getAllRecommended: () => ipcRenderer.invoke('rec:all'),
   onRecProgress: (cb) => ipcRenderer.on('rec:progress', (_e, p) => cb(p)),
   onPagesChanged: (cb) => ipcRenderer.on('pages:changed', () => cb()),
+  onStaticUpdated: (cb) => ipcRenderer.on('static:updated', () => cb()),
   onRecUpdated: (cb) => ipcRenderer.on('rec:updated', (_e, pages) => cb(pages)),
   onLcuState: (cb) => ipcRenderer.on('lcu:state', (_e, s) => cb(s)),
   onToast: (cb) => ipcRenderer.on('toast', (_e, msg) => cb(msg)),
